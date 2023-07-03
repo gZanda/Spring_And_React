@@ -12,6 +12,8 @@ import org.springframework.web.bind.annotation.RestController;
 
 import Spring.Full.model.User;
 import Spring.Full.service.UserService;
+import org.springframework.web.bind.annotation.PutMapping;
+
 
 @RestController
 @CrossOrigin(origins = "http://localhost:3000") // permite que o REACT front-end acesse o back-end
@@ -36,6 +38,12 @@ public class UserController {
     @GetMapping("/getOne/{id}")
     User getUserById(@PathVariable Long id){
         return userService.getUserById(id);
+    }
+
+    // PUT - necessita de um JSON no body da requisição e de um ID na URL
+    @PutMapping("/put/{id}")
+    User updateUser(@RequestBody User newUser, @PathVariable Long id){
+        return userService.updateUser(newUser, id);
     }
 
 
