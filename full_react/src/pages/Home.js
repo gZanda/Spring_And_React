@@ -34,16 +34,22 @@ export default function Home() {
                     <th scope="col">ID</th>
                     <th scope="col">Name</th>
                     <th scope="col">Email</th>
+                    <th scope="col">Action</th>
                     </tr>
                 </thead>
                 <tbody>
 
                     {
-                        users.map((user,index) => (
+                        users.map((user) => (
                             <tr>
                                 <td>{user.id}</td>
                                 <td>{user.username}</td>
                                 <td>{user.email}</td>
+                                <td>
+                                    <button className="btn btn-primary mx-2" > View </button>
+                                    <button className="btn btn-outline-primary mx-2" > Edit </button>
+                                    <button className="btn btn-danger mx-2" > Delete </button>
+                                </td>
                             </tr>
                         ))
                     }
