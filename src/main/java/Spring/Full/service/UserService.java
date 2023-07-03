@@ -45,4 +45,15 @@ public class UserService {
         return userRepository.save(userFound);
     }
 
+    // DELETE
+    public String deleteUser(Long id){
+        if(userRepository.existsById(id)){
+            userRepository.deleteById(id);
+            return "User deleted with success!";
+        }
+        else{
+            throw new UserNotFoundException(id);
+        }
+    }
+
 }
