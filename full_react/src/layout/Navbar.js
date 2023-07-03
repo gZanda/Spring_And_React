@@ -11,7 +11,7 @@ export default function Navbar() {
             <button className="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
                 <span className="navbar-toggler-icon"></span>
             </button>
-            <button className="btn"> Add User </button>
+            <button className="btn btn-outline-primary"> Add User </button>
             </nav>
 
         </div>
