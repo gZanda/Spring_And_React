@@ -27,6 +27,7 @@ public class UserService {
         return userRepository.findById(id).orElseThrow(()-> new UserNotFoundException(id));
     }
 
+    // Using MAP
     public User updateUser(User newUser, Long id){
         return userRepository.findById(id)
             .map(user -> {
@@ -34,6 +35,14 @@ public class UserService {
                 user.setEmail(newUser.getEmail());
                 return userRepository.save(user);
             }).orElseThrow(()-> new UserNotFoundException(id));
+    }
+
+    // Without using MAP
+    public User updateUser2(User newUser, Long id){
+        User userFound = userRepository.findById(id).orElseThrow(()-> new UserNotFoundException(id));
+        userFound.setUsername(newUser.getUsername());
+        userFound.setEmail(newUser.getEmail());
+        return userRepository.save(userFound);
     }
 
 }

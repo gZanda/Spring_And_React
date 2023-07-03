@@ -43,7 +43,7 @@ public class UserController {
     // PUT - necessita de um JSON no body da requisição e de um ID na URL
     @PutMapping("/put/{id}")
     User updateUser(@RequestBody User newUser, @PathVariable Long id){
-        return userService.updateUser(newUser, id);
+        return userService.updateUser2(newUser, id);
     }
 
 
