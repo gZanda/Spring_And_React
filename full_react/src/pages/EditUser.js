@@ -6,32 +6,23 @@ import { useEffect } from "react";
 
 export default function EditUser() {
 
-    //
+    // Navigate
     let navigate = useNavigate();
 
     // URL params
     const {id} = useParams();
 
-    // State inicial
-    const [user,setUser] = useState({
-        username:"",
-        email:""
-    });
-
-    // Objeto
-    const{username,email} = user;
-
-    // Function to handle change
-    const handleChange = (e) => {
-
-        setUser({...user,[e.target.name]:e.target.value});
-
-    }
+    // States iniciais
+    const [username,setUsername] = useState("");
+    const [email,setEmail] = useState("");
 
     // Function to handle submit
     const handleSubmit = async (e) => {
         // Não permite enviar form vazio
         e.preventDefault();
+        // Monta o objeto
+        const user = {username,email};
+        // PUT REQUEST
         await axios.put(`http://localhost:8080/put/${id}`,user);
         // Redireciona para o INDEX
         navigate("/");
@@ -41,7 +32,11 @@ export default function EditUser() {
     const loadUser = async () => {
 
         const result = await axios.get(`http://localhost:8080/getOne/${id}`);
-        setUser(result.data);
+
+        // Get the username from result
+        setUsername(result.data.username);
+        // Get the email from result
+        setEmail(result.data.email);
 
     }
 
@@ -68,7 +63,7 @@ export default function EditUser() {
                                 placeholder="Enter Your Name"
                                 name="username"
                                 value={username}
-                                onChange={(e)=>handleChange(e)}
+                                onChange={(e)=> setUsername(e.target.value)}
                                 required
                             />
                         </div>
@@ -81,7 +76,7 @@ export default function EditUser() {
                                 placeholder="Enter Your Emil"
                                 name="email"
                                 value={email}
-                                onChange={(e)=>handleChange(e)}
+                                onChange={(e)=> setEmail(e.target.value)}
                                 required
                             />
                         </div>
