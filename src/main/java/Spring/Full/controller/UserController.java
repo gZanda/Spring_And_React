@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import Spring.Full.exception.CustomExceptions;
 import Spring.Full.model.User;
 import Spring.Full.service.UserService;
 import org.springframework.web.bind.annotation.PutMapping;
@@ -51,6 +52,12 @@ public class UserController {
     @DeleteMapping("/delete/{id}")
     String deleteUser(@PathVariable Long id){
         return userService.deleteUser(id);
+    }
+
+    // GET to test Custom Exception
+    @GetMapping("/getException")
+    public String getException(){
+        throw new CustomExceptions("Teste de exceção");
     }
 
 }

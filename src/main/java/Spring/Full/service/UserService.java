@@ -5,7 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import Spring.Full.exception.UserNotFoundException;
+import Spring.Full.exception.CustomExceptions;
 import Spring.Full.model.User;
 import Spring.Full.repository.UserRepository;
 
@@ -24,22 +24,12 @@ public class UserService {
     }
 
     public User getUserById(Long id){
-        return userRepository.findById(id).orElseThrow(()-> new UserNotFoundException(id));
-    }
-
-    // Using MAP
-    public User updateUser(User newUser, Long id){
-        return userRepository.findById(id)
-            .map(user -> {
-                user.setUsername(newUser.getUsername());
-                user.setEmail(newUser.getEmail());
-                return userRepository.save(user);
-            }).orElseThrow(()-> new UserNotFoundException(id));
+        return userRepository.findById(id).orElseThrow(()-> new CustomExceptions("User not found with id " + id));
     }
 
     // Without using MAP
     public User updateUser2(User newUser, Long id){
-        User userFound = userRepository.findById(id).orElseThrow(()-> new UserNotFoundException(id));
+        User userFound = userRepository.findById(id).orElseThrow(()-> new CustomExceptions("User not found with id " + id));
         userFound.setUsername(newUser.getUsername());
         userFound.setEmail(newUser.getEmail());
         return userRepository.save(userFound);
@@ -52,7 +42,7 @@ public class UserService {
             return "User deleted with success!";
         }
         else{
-            throw new UserNotFoundException(id);
+            throw new CustomExceptions("User not found with " + id);
         }
     }
 
