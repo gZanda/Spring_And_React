@@ -3,15 +3,11 @@ import React from "react";
 import Axios from "axios";
 import { useState,useEffect } from "react";
 import { Link } from "react-router-dom";
-import { useParams } from "react-router-dom";
 
 export default function Home() {
 
     // State - Lista de Users
     const [users, setUsers] = useState([])
-
-    // URL params
-    const {id} = useParams();
 
     // UseEffect
     useEffect(() => {
