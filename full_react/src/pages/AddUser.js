@@ -4,29 +4,20 @@ import { useNavigate } from "react-router-dom";
 
 export default function AddUser() {
 
-    //
+    // Navigate
     let navigate = useNavigate();
 
-    // State inicial
-    const [user,setUser] = useState({
-        username:"",
-        email:""
-    });
-
-    // Objeto
-    const{username,email} = user;
-
-    // Function to handle change
-    const handleChange = (e) => {
-
-        setUser({...user,[e.target.name]:e.target.value});
-
-    }
+    // States iniciais
+    const [username,setUsername] = useState("");
+    const [email,setEmail] = useState("");
 
     // Function to handle submit
     const handleSubmit = async (e) => {
         // Não permite enviar form vazio
         e.preventDefault();
+        // Monta o objeto
+        const user = {username,email};
+        // Envia o objeto para o backend
         await axios.post("http://localhost:8080/post",user);
         // Redireciona para o INDEX
         navigate("/");
@@ -48,7 +39,7 @@ export default function AddUser() {
                                 placeholder="Enter Your Name"
                                 name="username"
                                 value={username}
-                                onChange={(e)=>handleChange(e)}
+                                onChange={(e) => setUsername(e.target.value)}
                                 required
                             />
                         </div>
@@ -58,10 +49,10 @@ export default function AddUser() {
                             <input
                                 type="email"
                                 className="form-control"
-                                placeholder="Enter Your Emil"
+                                placeholder="Enter Your Email"
                                 name="email"
                                 value={email}
-                                onChange={(e)=>handleChange(e)}
+                                onChange={(e)=> setEmail(e.target.value)}
                                 required
                             />
                         </div>
